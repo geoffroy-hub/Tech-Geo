@@ -23,7 +23,8 @@ VALUES (
     'image/svg+xml',
     'video/mp4',
     'video/webm',
-    'video/quicktime'
+    'video/quicktime',
+    'application/pdf'
   ]
 )
 ON CONFLICT (id) DO NOTHING;
