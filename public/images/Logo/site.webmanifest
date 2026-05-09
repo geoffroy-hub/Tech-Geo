@@ -1,0 +1,13 @@
+{
+  "name": "Tech-Geo Geospatial Solutions",
+  "short_name": "Tech-Geo",
+  "description": "Geospatial Solutions",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1a5fb4",
+  "icons": [
+    { "src": "/images/Logo/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/images/Logo/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
