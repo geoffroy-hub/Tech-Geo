@@ -2,9 +2,10 @@ import Link from 'next/link';
 
 export default function AboutPage() {
   const team = [
-    { name: 'Geoffroy', role: 'Fondateur & Développeur', bio: 'Passionné d\'électronique et de programmation, Geoffroy a créé Tech-geo pour partager sa passion et aider les débutants à se lancer.', img: '👤' },
-    { name: 'N\'devor', role: 'Expert Technique', bio: 'Spécialiste en robotique et systèmes embarqués, il apporte son expertise technique aux tutoriels et cours.', img: '🤖' },
-    { name: 'Contributeur 2', role: 'Rédacteur & Tutoriel', bio: 'Lourd contributeur à l\'élaboration de chaque contenu écrit des tutoriels et s\'adapte à tous les niveaux.', img: '✍️' },
+    { name: 'Geoffroy', role: 'Fondateur & Développeur', bio: 'Passionné d\'électronique et de programmation, Geoffroy a créé Tech-geo pour partager sa passion et aider les débutants à se lancer.', img: '/images/à propos/MK17.jpg' },
+    { name: 'N\'devor', role: 'Expert Technique', bio: 'Spécialiste en robotique et systèmes embarqués, il apporte son expertise technique aux tutoriels et cours.', img: '/images/à propos/XTROZ.jpg' },
+    { name: 'Safiou', role: 'Rédacteur & Tutoriel', bio: 'Lourd contributeur à l\'élaboration de chaque contenu écrit des tutoriels et s\'adapte à tous les niveaux.', img: '/images/à propos/OK.jpg' },
+    { name: 'Abdoul-Razak', role: 'Expert Hardware', bio: 'Passionné par le design de PCB et l\'optimisation des circuits, il veille à la qualité du matériel proposé.', img: '/images/à propos/82462.jpg' },
   ];
 
   const values = [
@@ -41,10 +42,17 @@ export default function AboutPage() {
       <section className="section" style={{ background: 'rgba(5, 28, 36, 0.4)' }}>
         <div className="container">
           <h2 className="section-title">Notre équipe</h2>
-          <div className="grid-3">
+          <div className="grid-team" style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+            gap: '2rem', 
+            marginTop: '3rem' 
+          }}>
             {team.map(member => (
               <div key={member.name} className="card team-card">
-                <div className="team-avatar">{member.img}</div>
+                <div className="team-avatar" style={{ overflow: 'hidden', padding: 0 }}>
+                  <img src={member.img} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
                 <h3>{member.name}</h3>
                 <p className="team-role">{member.role}</p>
                 <p className="team-bio">{member.bio}</p>
