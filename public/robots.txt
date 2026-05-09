@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /45.html
+Disallow: /nonne/
+Disallow: /js/gol.js
+
+Sitemap: https://tech-geo.com/sitemap.xml
