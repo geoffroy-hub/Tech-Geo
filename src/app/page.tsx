@@ -137,6 +137,48 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Testimonials */}
+      <section className="section" style={{ background: 'rgba(5, 28, 36, 0.4)' }}>
+        <div className="container">
+          <h2 className="section-title">Ce que nos utilisateurs disent</h2>
+          <div className="grid-3">
+            <div className="card testimonial-card animate-on-scroll">
+              <div className="testimonial-stars">★★★★★</div>
+              <p className="testimonial-text">« L&apos;équipe de Tech-geo est incroyable ! Mes projets d&apos;électronique fonctionnent enfin grâce à leurs conseils précieux. »</p>
+              <div className="testimonial-author">
+                <div className="testimonial-avatar">A</div>
+                <div>
+                  <div className="testimonial-name">Afi K.</div>
+                  <div className="testimonial-meta">Il y a 2 semaines · Lomé</div>
+                </div>
+              </div>
+            </div>
+            <div className="card testimonial-card animate-on-scroll">
+              <div className="testimonial-stars">★★★★★</div>
+              <p className="testimonial-text">« Meilleure plateforme d&apos;apprentissage technique à Lomé. Les tutoriels sont clairs et les composants sont de qualité. »</p>
+              <div className="testimonial-author">
+                <div className="testimonial-avatar">K</div>
+                <div>
+                  <div className="testimonial-name">Kossiwa D.</div>
+                  <div className="testimonial-meta">Il y a 1 mois · Lomé</div>
+                </div>
+              </div>
+            </div>
+            <div className="card testimonial-card animate-on-scroll">
+              <div className="testimonial-stars">★★★★★</div>
+              <p className="testimonial-text">« J&apos;ai suivi les cours de robotique et j&apos;ai pu construire mon propre assistant. Un suivi excellent et des résultats concrets. »</p>
+              <div className="testimonial-author">
+                <div className="testimonial-avatar">M</div>
+                <div>
+                  <div className="testimonial-name">Mawuli A.</div>
+                  <div className="testimonial-meta">Il y a 3 semaines · Lomé</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Stats */}
       <section className="section stats-section">
         <div className="container">
@@ -195,7 +237,7 @@ export default function HomePage() {
               { src: '/images/tutorial-photos/Arduino Bluetooth Car Building 🛠.jpg', label: 'Arduino Robotique' },
               { src: '/images/tutorial-photos/technical-schematic-diagram-analog-electronic-260nw-2505467983.jpg', label: 'Schémas Analogiques' },
               { src: '/images/tutorial-photos/transistor.jpg', label: 'Transistor King' },
-              { src: '/images/tutorial-photos/Arduino Nano Quadcopter.jpg', label: 'Projet Drone Nano' },
+              { src: '/images/tutorial-photos/placeholder-3.jpg', label: 'Projet Drone Nano' },
               { src: '/images/tutorial-photos/close-up-electronic-components.jpg', label: 'Focus Composants' },
               { src: '/images/tutorial-photos/various-radio-components-soldering-iron-600nw-2695650513.jpg', label: 'Atelier Soudure' },
               { src: '/images/tutorial-photos/78xx Regulators.jpg', label: 'Régulateurs 78xx' },

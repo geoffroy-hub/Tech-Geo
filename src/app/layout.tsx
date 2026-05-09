@@ -5,8 +5,26 @@ import ClientLayout from './client-layout';
 export const metadata: Metadata = {
   title: 'Tech‑Geo — Électronique & Informatique',
   description: 'Formation en électronique et informatique. Cours, tutoriels, et boutique en ligne.',
-  manifest: '/manifest.json',
-  icons: { icon: '/images/favicon.svg' },
+  manifest: '/images/Logo/site.webmanifest',
+  icons: {
+    icon: [
+      { url: '/images/Logo/favicon.ico' },
+      { url: '/images/Logo/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/images/Logo/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/images/Logo/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/images/Logo/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/images/Logo/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      { rel: 'mask-icon', url: '/images/Logo/mstile-150x150.png', color: '#1a5fb4' },
+    ],
+  },
+  other: {
+    'msapplication-TileColor': '#1a5fb4',
+    'msapplication-TileImage': '/images/Logo/mstile-150x150.png',
+  },
   openGraph: {
     title: 'Tech‑Geo — Électronique & Informatique',
     description: 'Apprenez l\'électronique et l\'informatique avec des cours interactifs.',
@@ -19,7 +37,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#051C24',
+  themeColor: '#1a5fb4',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

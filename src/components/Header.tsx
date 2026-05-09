@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 export default function Header({ onSearchOpen, onCartOpen }: { onSearchOpen: () => void; onCartOpen: () => void }) {
   const pathname = usePathname();
-  const { user, signOut } = useAuth();
+  const { user, profile, signOut } = useAuth();
   const { isDark, toggle } = useTheme();
   const { totalItems } = useCart();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -21,9 +21,12 @@ export default function Header({ onSearchOpen, onCartOpen }: { onSearchOpen: () 
     { href: '/', label: 'Accueil' },
     { href: '/tutorials', label: 'Tutoriels' },
     { href: '/boutique', label: 'Boutique' },
-    { href: '/steam', label: 'Steam Lab' },
-    { href: '/steam/games', label: 'Jeux' },
-    { href: '/about', label: 'À propos' },
+    { href: '/software', label: 'Logiciels' },
+    {href: '/api', label: 'API'},
+    {href: '/business', label: 'Business'},
+    {href: '/steam', label: 'Steam'},
+    {href: '/steam/games', label: 'Jeux'},
+    {href: '/about', label: 'À propos'},
     { href: '/contact', label: 'Contact' },
   ];
 
@@ -61,8 +64,8 @@ export default function Header({ onSearchOpen, onCartOpen }: { onSearchOpen: () 
                   {dropdownOpen && (
                     <div className="user-dropdown show">
                       <div className="user-dropdown-header">
-                        <div className="user-email">{user.email}</div>
-                        <div className="user-role">{user.user_metadata?.role || 'client'}</div>
+                        <div className="user-name">{user.user_metadata?.name || user.email}</div>
+                        <div className="user-role">{profile?.role || 'client'}</div>
                       </div>
                       <Link href="/account">Mon compte</Link>
                       <Link href="/account?tab=orders">Mes commandes</Link>
@@ -73,7 +76,9 @@ export default function Header({ onSearchOpen, onCartOpen }: { onSearchOpen: () 
                   )}
                 </div>
               ) : (
-                <Link href="/account" className="btn btn-outline btn-sm">Connexion</Link>
+                <Link href="/account" className="btn btn-outline btn-sm" title="Connexion" style={{ padding: '0.5rem', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span>👤</span>
+                </Link>
               )}
             </div>
           </nav>
@@ -91,6 +96,10 @@ export default function Header({ onSearchOpen, onCartOpen }: { onSearchOpen: () 
             {link.label}
           </Link>
         ))}
+        <div className="mobile-nav-divider" style={{ height: '1px', background: 'rgba(255,255,255,0.1)', margin: '1rem 0' }}></div>
+        <Link href="/account" className="btn btn-primary" style={{ margin: '0 1.5rem', justifyContent: 'center' }} onClick={() => setMobileOpen(false)}>
+          {user ? 'Mon Compte' : '👤 Connexion'}
+        </Link>
       </nav>
     </>
   );

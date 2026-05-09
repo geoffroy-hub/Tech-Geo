@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CartSidebar from '@/components/CartSidebar';
@@ -10,6 +10,7 @@ import AuthModal from '@/components/AuthModal';
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
+  const pathname = usePathname();
   const [searchOpen, setSearchOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
@@ -29,6 +30,11 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     return () => document.removeEventListener('keydown', handler);
   }, [router]);
 
+  // Page admin ou compte : aucun header/footer/nav
+  if (pathname?.startsWith('/admin') || pathname === '/account') {
+    return <>{children}</>;
+  }
+
   return (
     <>
       <Header onSearchOpen={openSearch} onCartOpen={openCart} />
@@ -38,28 +44,6 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       <main>{children}</main>
       <Footer />
 
-      <nav className="mobile-bottom-nav" aria-label="Navigation mobile">
-        <div className="bottom-nav-items">
-          <a href="/" className="bottom-nav-item active">
-            <span className="icon">🏠</span> Accueil
-          </a>
-          <a href="/tutorials" className="bottom-nav-item">
-            <span className="icon">📚</span> Cours
-          </a>
-          <a href="/boutique" className="bottom-nav-item">
-            <span className="icon">🛒</span> Boutique
-          </a>
-          <a href="/steam" className="bottom-nav-item">
-            <span className="icon">🎮</span> Steam
-          </a>
-          <a href="/wishlist" className="bottom-nav-item">
-            <span className="icon">♡</span> Wishlist
-          </a>
-          <a href="/about" className="bottom-nav-item">
-            <span className="icon">ℹ️</span> À propos
-          </a>
-        </div>
-      </nav>
     </>
   );
 }
