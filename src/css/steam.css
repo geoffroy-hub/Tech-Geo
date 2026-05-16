@@ -1,0 +1,184 @@
+/* ===================================================
+   Tech‑geo — Steam Page Styles (/nonne/)
+   =================================================== */
+
+/* ---------- Section Separation ---------- */
+.steam-section {
+  padding: 4rem 0;
+  position: relative;
+}
+
+.steam-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: var(--clr-accent);
+  border-radius: 2px;
+  opacity: 0.4;
+}
+
+.steam-section:last-child::after {
+  display: none;
+}
+
+/* ---------- Steam Content ---------- */
+.steam-status {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.steam-server-status {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 113, 152, 0.2);
+}
+.steam-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.steam-frame-container {
+  background: linear-gradient(145deg, var(--clr-deep), rgba(5, 28, 36, 0.95));
+  border: 1px solid var(--clr-teal);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.steam-frame-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(0, 60, 87, 0.4);
+  border-bottom: 1px solid var(--clr-teal);
+}
+
+.steam-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.steam-dot.red { background: #ff5f56; }
+.steam-dot.yellow { background: #ffbd2e; }
+.steam-dot.green { background: #27c93f; }
+
+.steam-frame-title {
+  margin-left: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--clr-muted);
+  font-family: var(--font-mono);
+}
+
+.steam-frame {
+  width: 100%;
+  height: 500px;
+  border: none;
+  background: var(--clr-dark);
+}
+
+.steam-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+  color: var(--clr-muted);
+  text-align: center;
+}
+
+.steam-placeholder-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.4;
+}
+
+.steam-placeholder p {
+  font-size: 1rem;
+}
+
+/* ---------- Status Indicators ---------- */
+.steam-status {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.status-card {
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  min-height: 280px;
+}
+
+.status-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.status-card h3 {
+  margin-bottom: 0.25rem;
+}
+
+.status-card p {
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-indicator.online {
+  background: #27c93f;
+  box-shadow: 0 0 8px rgba(39, 201, 63, 0.5);
+  animation: pulse 2s infinite;
+}
+
+.status-indicator.offline {
+  background: #ff4757;
+}
+
+.status-indicator.pending {
+  background: #ffbd2e;
+  animation: pulse 1.5s infinite;
+}
+
+.status-info h4 {
+  font-size: 0.9rem;
+  margin-bottom: 0.15rem;
+}
+
+.status-info p {
+  font-size: 0.8rem;
+  margin-bottom: 0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .steam-frame {
+    height: 300px;
+  }
+
+  .steam-placeholder {
+    height: 300px;
+  }
+
+  .steam-status {
+    grid-template-columns: 1fr;
+  }
+}
