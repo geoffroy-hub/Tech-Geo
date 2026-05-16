@@ -1,0 +1,30 @@
+{
+  "name": "Tech-geo — Électronique & Informatique",
+  "short_name": "Tech-geo",
+  "description": "Formation en électronique et informatique. Cours, tutoriels, et boutique en ligne.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#051C24",
+  "theme_color": "#1a5fb4",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "images/Logo/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/Logo/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/logo.svg",
+      "sizes": "128x128",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
