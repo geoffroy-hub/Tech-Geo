@@ -1,12 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { useRouter, usePathname } from 'next/navigation';
 import { CartProvider } from '@/hooks/useCart';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import AuthModal from '@/components/AuthModal';
-import PushNotifications from '@/components/PushNotifications';
+
+// Chargés en lazy — non critiques au premier rendu
+const AuthModal = dynamic(() => import('@/components/AuthModal'), { ssr: false });
+const PushNotifications = dynamic(() => import('@/components/PushNotifications'), { ssr: false });
+const ScrollToTop = dynamic(() => import('@/components/ScrollToTop'), { ssr: false });
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -36,6 +40,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       <main>{children}</main>
       <Footer />
       <PushNotifications />
+      <ScrollToTop />
     </CartProvider>
   );
 }

@@ -7,11 +7,7 @@ export default function HomePage() {
     <>
       {/* 1. Hero */}
       <section className="hero">
-        <div className="hero-video">
-          <video autoPlay muted loop playsInline poster="/images/hero-poster.webp">
-            <source src="/videos/hero-bg.mp4" type="video/mp4" />
-          </video>
-        </div>
+        <div className="hero-video hero-video-animated" aria-hidden="true" />
         <div className="hero-overlay"></div>
 
         <div className="circuit-decoration">
@@ -165,38 +161,72 @@ export default function HomePage() {
       {/* 6. Témoignages */}
       <section className="section" style={{ background: 'rgba(5, 28, 36, 0.4)' }}>
         <div className="container">
-          <h2 className="section-title">Ce que nos utilisateurs disent</h2>
+          <h2 className="section-title">Ce que nos clients disent</h2>
+          <p className="section-subtitle" style={{ textAlign: 'center', color: 'var(--clr-muted)', marginTop: '-1rem', marginBottom: '2rem' }}>Ils nous font confiance depuis le Togo et toute l&apos;Afrique</p>
           <div className="grid-3">
             <div className="card testimonial-card animate-on-scroll">
               <div className="testimonial-stars">★★★★★</div>
-              <p className="testimonial-text">« L&apos;équipe de Tech-geo est incroyable ! Mes projets d&apos;électronique fonctionnent enfin grâce à leurs conseils précieux. »</p>
+              <p className="testimonial-text">« L&apos;équipe de Tech-geo est incroyable ! Mon site e-commerce est en ligne en moins de 5 jours. Très professionnel. »</p>
               <div className="testimonial-author">
                 <div className="testimonial-avatar">A</div>
                 <div>
                   <div className="testimonial-name">Afi K.</div>
-                  <div className="testimonial-meta">Il y a 2 semaines · Lomé</div>
+                  <div className="testimonial-meta">🇹🇬 Lomé, Togo · Il y a 2 semaines</div>
                 </div>
               </div>
             </div>
             <div className="card testimonial-card animate-on-scroll">
               <div className="testimonial-stars">★★★★★</div>
-              <p className="testimonial-text">« Meilleure plateforme d&apos;apprentissage technique à Lomé. Les tutoriels sont clairs et les composants sont de qualité. »</p>
+              <p className="testimonial-text">« J&apos;ai commandé mon site vitrine depuis Abidjan. La communication était fluide et le résultat dépasse mes attentes. »</p>
               <div className="testimonial-author">
                 <div className="testimonial-avatar">K</div>
                 <div>
-                  <div className="testimonial-name">Kossiwa D.</div>
-                  <div className="testimonial-meta">Il y a 1 mois · Lomé</div>
+                  <div className="testimonial-name">Kouassi B.</div>
+                  <div className="testimonial-meta">🇨🇮 Abidjan, Côte d&apos;Ivoire · Il y a 1 mois</div>
                 </div>
               </div>
             </div>
             <div className="card testimonial-card animate-on-scroll">
               <div className="testimonial-stars">★★★★★</div>
-              <p className="testimonial-text">« J&apos;ai suivi les cours de robotique et j&apos;ai pu construire mon propre assistant. Un suivi excellent et des résultats concrets. »</p>
+              <p className="testimonial-text">« Les tutoriels Arduino sont excellents. J&apos;ai pu construire mon propre système domotique grâce aux explications claires. »</p>
               <div className="testimonial-author">
                 <div className="testimonial-avatar">M</div>
                 <div>
                   <div className="testimonial-name">Mawuli A.</div>
-                  <div className="testimonial-meta">Il y a 3 semaines · Lomé</div>
+                  <div className="testimonial-meta">🇬🇭 Accra, Ghana · Il y a 3 semaines</div>
+                </div>
+              </div>
+            </div>
+            <div className="card testimonial-card animate-on-scroll">
+              <div className="testimonial-stars">★★★★★</div>
+              <p className="testimonial-text">« Tech-Geo m&apos;a livré les composants rapidement et le support technique est réactif. Je recommande à tous les makers africains ! »</p>
+              <div className="testimonial-author">
+                <div className="testimonial-avatar">F</div>
+                <div>
+                  <div className="testimonial-name">Fatou D.</div>
+                  <div className="testimonial-meta">🇸🇳 Dakar, Sénégal · Il y a 2 mois</div>
+                </div>
+              </div>
+            </div>
+            <div className="card testimonial-card animate-on-scroll">
+              <div className="testimonial-stars">★★★★★</div>
+              <p className="testimonial-text">« Excellent rapport qualité-prix pour la création de site. Mon restaurant a doublé ses réservations en ligne après la mise en ligne. »</p>
+              <div className="testimonial-author">
+                <div className="testimonial-avatar">S</div>
+                <div>
+                  <div className="testimonial-name">Seydou T.</div>
+                  <div className="testimonial-meta">🇧🇫 Ouagadougou, Burkina · Il y a 3 semaines</div>
+                </div>
+              </div>
+            </div>
+            <div className="card testimonial-card animate-on-scroll">
+              <div className="testimonial-stars">★★★★★</div>
+              <p className="testimonial-text">« Service sérieux et ponctuel. J&apos;ai commandé depuis Cotonou, tout s&apos;est très bien passé. Site livré avec formation incluse ! »</p>
+              <div className="testimonial-author">
+                <div className="testimonial-avatar">C</div>
+                <div>
+                  <div className="testimonial-name">Chloé M.</div>
+                  <div className="testimonial-meta">🇧🇯 Cotonou, Bénin · Il y a 5 semaines</div>
                 </div>
               </div>
             </div>
@@ -225,7 +255,7 @@ export default function HomePage() {
             ].map((img, i) => (
               <div key={i} className="card" style={{ padding: 0, overflow: 'hidden' }}>
                 <div style={{ position: 'relative', height: 220 }}>
-                  <Image src={img.src} alt={img.label} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 25vw" />
+                  <Image src={img.src} alt={img.label} fill style={{ objectFit: 'cover' }} sizes="(max-width: 768px) 100vw, 25vw" loading={i < 4 ? 'eager' : 'lazy'} />
                 </div>
                 <div style={{ padding: '0.75rem' }}>
                   <p style={{ fontSize: '0.8rem', margin: 0, color: 'var(--clr-muted)' }}>{img.label}</p>

@@ -85,6 +85,7 @@ export default function Header({ onSearchOpen, onAuthOpen }: { onSearchOpen: () 
     { href: '/boutique', label: 'Boutique' },
     { href: '/software', label: 'Logiciels' },
     { href: '/site', label: 'Site Web' },
+    { href: '/tarifs', label: 'Tarifs' },
     { href: '/portfolio', label: 'Portfolio' },
     { href: '/api', label: 'API' },
     { href: '/business', label: 'Business' },
@@ -107,11 +108,11 @@ export default function Header({ onSearchOpen, onAuthOpen }: { onSearchOpen: () 
                 {link.label}
               </Link>
             ))}
-            <div className={`lang-theme-pill${!isDark ? ' light' : ''}`}>
+            <div className={`lang-theme-pill${!isDark ? ' light' : ''}`} suppressHydrationWarning>
               <div id="google_translate_element_hidden" style={{ display: 'none', position: 'absolute', pointerEvents: 'none', visibility: 'hidden' }} aria-hidden="true" />
               <LangSwitcher />
               <span className="pill-sep" aria-hidden="true">v</span>
-              <button className="pill-theme-btn" aria-label="Basculer le thème" onClick={(e) => toggle(e)}>
+              <button className="pill-theme-btn" aria-label="Basculer le thème" onClick={(e) => toggle(e)} suppressHydrationWarning>
                 {isDark ? '🌙' : '☀️'}
               </button>
             </div>
@@ -182,30 +183,30 @@ export default function Header({ onSearchOpen, onAuthOpen }: { onSearchOpen: () 
             )}
           </nav>
 
-          <button className="hamburger" aria-label="Menu" onClick={() => setMobileOpen(!mobileOpen)}>
-            <span></span><span></span><span></span>
-          </button>
+          <div className="mobile-header-actions">
+            <div className={`lang-theme-pill${!isDark ? ' light' : ''}`} suppressHydrationWarning>
+              <div id="google_translate_element_hidden_mobile" style={{ display: 'none', position: 'absolute', pointerEvents: 'none', visibility: 'hidden' }} aria-hidden="true" />
+              <LangSwitcher />
+              <span className="pill-sep" aria-hidden="true">v</span>
+              <button className="pill-theme-btn" aria-label="Basculer le thème" onClick={(e) => toggle(e)} suppressHydrationWarning>
+                {isDark ? '🌙' : '☀️'}
+              </button>
+            </div>
+            <button className="hamburger" aria-label="Menu" onClick={() => setMobileOpen(!mobileOpen)}>
+              <span></span><span></span><span></span>
+            </button>
+          </div>
         </div>
       </header>
 
       {mobileOpen && <div className="nav-overlay active" onClick={() => setMobileOpen(false)}></div>}
-      <nav className={`mobile-nav ${mobileOpen ? 'open' : ''}`} aria-label="Navigation mobile">
+      <nav className={`mobile-nav ${mobileOpen ? 'open' : ''}`} aria-label="Navigation mobile" suppressHydrationWarning>
         {navLinks.map(link => (
           <Link key={link.href} href={link.href} className={isActive(link.href)} onClick={() => setMobileOpen(false)}>
             {link.label}
           </Link>
         ))}
         <div className="mobile-nav-divider" style={{ height: '1px', background: 'rgba(255,255,255,0.1)', margin: '1rem 0' }}></div>
-        <div style={{ padding: '0 1.5rem 0.75rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <span style={{ fontSize: '0.8rem', opacity: 0.55 }}>Thème & Langue</span>
-          <div className={`lang-theme-pill mobile-pill${!isDark ? ' light' : ''}`}>
-            <LangSwitcher />
-            <span className="pill-sep" aria-hidden="true">v</span>
-            <button className="pill-theme-btn" aria-label="Basculer le thème" onClick={(e) => toggle(e)}>
-              {isDark ? '🌙' : '☀️'}
-            </button>
-          </div>
-        </div>
         <Link href="/account" className="btn btn-primary" style={{ margin: '0 1.5rem', justifyContent: 'center' }} onClick={() => { setMobileOpen(false); if (!user && onAuthOpen) onAuthOpen(); }}>
           {user ? 'Mon Compte' : '👤 Connexion'}
         </Link>

@@ -229,10 +229,11 @@ export default function ApiPage() {
                   <div>
                     <label style={{ display: 'block', fontSize: '0.8rem', color: 'var(--clr-muted)', marginBottom: '0.3rem' }}>Téléphone (optionnel)</label>
                     <input
-                      type="tel"
-                      value={modal.phone}
+                      type="text"
+                        inputMode="tel"
+                        value={modal.phone}
                       onChange={e => setModal(m => ({ ...m, phone: e.target.value }))}
-                      placeholder="+228 XX XX XX XX"
+                      placeholder="+228 71 03 01 88"
                       style={{
                         width: '100%', padding: '0.7rem 1rem', borderRadius: '8px',
                         border: '1px solid var(--clr-border)', background: 'var(--clr-bg)',
@@ -256,7 +257,7 @@ export default function ApiPage() {
                   <p style={{ fontSize: '0.82rem', color: 'var(--clr-muted)', margin: 0, lineHeight: 1.7 }}>
                     💳 <strong style={{ color: 'var(--clr-text)' }}>Comment payer :</strong><br />
                     Envoyez <strong style={{ color: 'var(--clr-accent)' }}>2 500 FCFA</strong> par <strong>Flooz / TMoney / Wave</strong> au :<br />
-                    <span style={{ color: 'var(--clr-accent)', fontSize: '1rem', fontWeight: 700 }}>+228 XX XX XX XX</span><br />
+                    <span style={{ color: 'var(--clr-accent)', fontSize: '1rem', fontWeight: 700 }}>+228 71 03 01 88</span><br />
                     <span style={{ fontSize: '0.78rem' }}>Mentionnez votre email en référence.</span>
                   </p>
                 </div>

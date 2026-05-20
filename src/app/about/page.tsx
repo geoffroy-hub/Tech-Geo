@@ -4,10 +4,10 @@ import NewsletterForm from '@/components/NewsletterForm';
 
 export default function AboutPage() {
   const team = [
-    { name: 'Geoffroy', role: 'Fondateur & Développeur', bio: 'Passionné d\'électronique et de programmation, Geoffroy a créé Tech-geo pour partager sa passion et aider les débutants à se lancer.', img: '/images/à propos/MK17.webp' },
-    { name: 'N\'devor', role: 'Expert Technique', bio: 'Spécialiste en robotique et systèmes embarqués, il apporte son expertise technique aux tutoriels et cours.', img: '/images/à propos/XTROZ.webp' },
-    { name: 'Safiou', role: 'Rédacteur & Tutoriel', bio: 'Lourd contributeur à l\'élaboration de chaque contenu écrit des tutoriels et s\'adapte à tous les niveaux.', img: '/images/à propos/OK.webp' },
-    { name: 'Abdoul-Razak', role: 'Expert Hardware', bio: 'Passionné par le design de PCB et l\'optimisation des circuits, il veille à la qualité du matériel proposé.', img: '/images/à propos/82462.webp' },
+    { name: 'Geoffroy', role: 'Fondateur & Développeur', bio: 'Passionné d\'électronique et de programmation, Geoffroy a créé Tech-geo pour partager sa passion et aider les débutants à se lancer.', img: '/images/a-propos/MK17.webp' },
+    { name: 'N\'devor', role: 'Expert Technique', bio: 'Spécialiste en robotique et systèmes embarqués, il apporte son expertise technique aux tutoriels et cours.', img: '/images/a-propos/XTROZ.webp' },
+    { name: 'Safiou', role: 'Rédacteur & Tutoriel', bio: 'Lourd contributeur à l\'élaboration de chaque contenu écrit des tutoriels et s\'adapte à tous les niveaux.', img: '/images/a-propos/OK.webp' },
+    { name: 'Abdoul-Razak', role: 'Expert Hardware', bio: 'Passionné par le design de PCB et l\'optimisation des circuits, il veille à la qualité du matériel proposé.', img: '/images/a-propos/82462.webp' },
   ];
 
   const values = [
@@ -60,22 +60,22 @@ export default function AboutPage() {
                 <p className="team-bio">{member.bio}</p>
                 <div className="social-links-modern" style={{ display: 'flex', gap: '0.6rem', marginTop: '1.25rem', justifyContent: 'center' }}>
                   <a href="#" className="social-icon-box instagram" title="Instagram" style={{ width: '32px', height: '32px', padding: '6px' }}>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" alt="Instagram"  loading="lazy" decoding="async"/>
                   </a>
                   <a href="#" className="social-icon-box facebook" title="Facebook" style={{ width: '32px', height: '32px', padding: '5px' }}>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_(2019).png" alt="Facebook" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_(2019).png" alt="Facebook"  loading="lazy" decoding="async"/>
                   </a>
                   <a href="#" className="social-icon-box tiktok" title="TikTok" style={{ width: '32px', height: '32px', padding: '8px' }}>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Ionicons_logo-tiktok.svg" alt="TikTok" style={{ filter: 'invert(1)' }} />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Ionicons_logo-tiktok.svg" alt="TikTok" style={{ filter: 'invert(1)' }}  loading="lazy" decoding="async"/>
                   </a>
                   <a href="#" className="social-icon-box whatsapp" title="WhatsApp" style={{ width: '32px', height: '32px', padding: '6px' }}>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"  loading="lazy" decoding="async"/>
                   </a>
                   <a href="#" className="social-icon-box linkedin" title="LinkedIn" style={{ width: '32px', height: '32px', padding: '6px' }}>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn"  loading="lazy" decoding="async"/>
                   </a>
                   <a href="#" className="social-icon-box x" title="X (Twitter)" style={{ width: '32px', height: '32px', padding: '8px' }}>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" alt="X" style={{ filter: 'invert(1)' }} />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg" alt="X" style={{ filter: 'invert(1)' }}  loading="lazy" decoding="async"/>
                   </a>
                 </div>
               </div>

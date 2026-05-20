@@ -83,7 +83,7 @@ const faqSections = [
       },
       {
         q: 'Comment contacter le support ?',
-        a: 'Vous pouvez nous contacter via le formulaire sur la page Contact, par email ou directement par WhatsApp au +228 XX XX XX XX. Nous répondons en moins de 24h.',
+        a: 'Vous pouvez nous contacter via le formulaire sur la page Contact, par email ou directement par WhatsApp au +228 71 03 01 88. Nous répondons en moins de 24h.',
       },
     ],
   },

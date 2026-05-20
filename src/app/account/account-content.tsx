@@ -73,48 +73,16 @@ export default function AccountContent() {
     if (error) setLoginError(error.message);
   };
 
-  const formatTogoPhone = (value: string) => {
-    // Remove all non-digit characters except leading +
-    const digits = value.replace(/\D/g, '');
-    
-    // Handle different input cases
-    let normalized = digits;
-    if (digits.startsWith('228')) {
-      normalized = digits.slice(3); // remove country code
-    } else if (digits.startsWith('00228')) {
-      normalized = digits.slice(5);
-    }
-    
-    // Keep only 8 digits max (Togolese local number)
-    normalized = normalized.slice(0, 8);
-    
-    // Format as XX XX XX XX
-    const parts = [];
-    for (let i = 0; i < normalized.length; i += 2) {
-      parts.push(normalized.slice(i, i + 2));
-    }
-    
-    const formatted = parts.join(' ');
-    return normalized.length > 0 ? `+228 ${formatted}` : '';
-  };
-
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value;
-    
-    // Allow clearing the field
-    if (raw === '' || raw === '+228 ' || raw === '+228') {
-      setProfilePhone('');
-      setProfilePhoneError('');
-      return;
-    }
-    
-    const formatted = formatTogoPhone(raw);
-    setProfilePhone(formatted);
-    
-    // Validate: +228 + 8 digits = full number
-    const digits = formatted.replace(/\D/g, '').slice(3); // remove 228
-    if (digits.length > 0 && digits.length < 8) {
-      setProfilePhoneError('Le numéro doit contenir 8 chiffres après +228');
+    if (raw === '+') { setProfilePhone(''); setProfilePhoneError(''); return; }
+    setProfilePhone(raw);
+    // Validate: must start with + and have at least 8 digits
+    const digits = raw.replace(/\D/g, '');
+    if (raw && !raw.startsWith('+')) {
+      setProfilePhoneError('Le numéro doit commencer par + (ex: +228 71 03 01 88)');
+    } else if (digits.length > 0 && digits.length < 8) {
+      setProfilePhoneError('Numéro trop court');
     } else {
       setProfilePhoneError('');
     }
@@ -393,43 +361,30 @@ export default function AccountContent() {
                   </div>
                   
                   <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <label>
                       Téléphone
-                      <span style={{ fontSize: '0.75rem', color: 'var(--clr-muted)', fontWeight: 400 }}>(Togo)</span>
                     </label>
-                    <div style={{ position: 'relative' }}>
-                      <span style={{
-                        position: 'absolute',
-                        left: '1rem',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        fontSize: '1.1rem',
-                        lineHeight: 1,
-                        pointerEvents: 'none',
-                        zIndex: 1,
-                      }}>🇹🇬</span>
-                      <input
-                        type="tel"
+                    <input
+                        type="text"
+                        inputMode="tel"
                         value={profilePhone}
                         onChange={handlePhoneChange}
-                        onFocus={e => { if (!e.target.value) setProfilePhone('+228 '); }}
-                        onBlur={e => { if (e.target.value === '+228 ' || e.target.value === '+228') setProfilePhone(''); }}
-                        placeholder="+228 XX XX XX XX"
-                        maxLength={17}
+                        onFocus={e => { if (!e.target.value) setProfilePhone('+'); }}
+                        onBlur={e => { if (e.target.value === '+') setProfilePhone(''); }}
+                        placeholder="ex: +228 71 03 01 88"
+                        maxLength={20}
                         style={{
                           width: '100%',
-                          paddingLeft: '2.75rem',
                           borderColor: profilePhoneError ? '#ff4757' : undefined,
                           boxShadow: profilePhoneError ? '0 0 0 2px rgba(255,71,87,0.15)' : undefined,
                         }}
                       />
-                    </div>
                     {profilePhoneError && (
                       <p style={{ color: '#ff4757', fontSize: '0.8rem', marginTop: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                         ⚠️ {profilePhoneError}
                       </p>
                     )}
-                    {profilePhone && !profilePhoneError && profilePhone.replace(/\D/g, '').length === 11 && (
+                    {profilePhone && !profilePhoneError && profilePhone.replace(/\D/g, '').length >= 8 && (
                       <p style={{ color: '#4caf50', fontSize: '0.8rem', marginTop: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                         ✓ Numéro valide
                       </p>

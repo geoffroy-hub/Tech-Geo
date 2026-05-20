@@ -2,7 +2,28 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import ShareButtons from '@/components/ShareButtons';
 import { TUTORIALS, TUTORIAL_CONTENT } from '../data';
+
+import type { Metadata } from 'next';
+import { TUTORIALS, TUTORIAL_CONTENT } from '../data';
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const tutorial = TUTORIALS.find(t => t.slug === slug);
+  if (!tutorial) return {};
+  return {
+    title: `${tutorial.title} | Tech-Geo Tutoriels`,
+    description: tutorial.description,
+    openGraph: {
+      title: tutorial.title,
+      description: tutorial.description,
+      images: [{ url: `https://tech-geo.vercel.app${tutorial.image}`, width: 1200, height: 630 }],
+      type: 'article',
+    },
+    twitter: { card: 'summary_large_image', title: tutorial.title, description: tutorial.description },
+  };
+}
 
 export default function TutorialDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -25,15 +46,36 @@ export default function TutorialDetailPage() {
   const prev = TUTORIALS[currentIndex - 1] ?? null;
   const next = TUTORIALS[currentIndex + 1] ?? null;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": tutorial.title,
+    "description": tutorial.description,
+    "image": `https://tech-geo.vercel.app${tutorial.image}`,
+    "url": `https://tech-geo.vercel.app/tutorials/${tutorial.slug}`,
+    "inLanguage": "fr-FR",
+    "author": { "@type": "Organization", "name": "Tech-Geo" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Tech-Geo",
+      "logo": { "@type": "ImageObject", "url": "https://tech-geo.vercel.app/images/Logo/logo.webp" }
+    },
+    "datePublished": "2026-01-01",
+    "dateModified": "2026-05-16",
+    "keywords": tutorial.tags?.join(', ') ?? tutorial.category,
+    "articleSection": tutorial.category
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Hero banner */}
       <div style={{ position: 'relative', height: '320px', overflow: 'hidden' }}>
         <img
           src={tutorial.image}
           alt={tutorial.title}
           style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.4)' }}
-        />
+         loading="lazy" decoding="async"/>
         <div
           style={{
             position: 'absolute', inset: 0,
@@ -63,6 +105,9 @@ export default function TutorialDetailPage() {
             {tutorial.title}
           </h1>
           <p style={{ margin: '0.5rem 0 0', color: 'rgba(255,255,255,0.75)', fontSize: '1rem' }}>{tutorial.description}</p>
+          <div style={{ marginTop: '1rem' }}>
+            <ShareButtons title={tutorial.title} description={tutorial.description} url={`https://tech-geo.vercel.app/tutorials/${tutorial.slug}`} />
+          </div>
         </div>
       </div>
 

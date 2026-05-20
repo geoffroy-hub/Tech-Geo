@@ -4,6 +4,7 @@ import ClientLayout from './client-layout';
 import ErrorBoundary from '@/components/ErrorBoundary';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://tech-geo.vercel.app'),
   title: 'Tech‑Geo — Électronique & Informatique',
   description: 'Formation en électronique et informatique. Cours, tutoriels, et boutique en ligne.',
   manifest: '/images/Logo/site.webmanifest',
@@ -45,18 +46,62 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr">
       <head>
+        {/* Preconnect pour accélérer les ressources critiques */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://supabase.co" />
+        <link rel="dns-prefetch" href="https://translate.googleapis.com" />
+        <meta name="theme-color" content="#051c24" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "Tech-Geo",
-            "url": "https://tech-geo.vercel.app",
-            "description": "Plateforme d'apprentissage en électronique et informatique",
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": "https://tech-geo.vercel.app?q={search_term_string}",
-              "query-input": "required name=search_term_string"
-            }
+            "@graph": [
+              {
+                "@type": "WebSite",
+                "@id": "https://tech-geo.vercel.app/#website",
+                "name": "Tech-Geo",
+                "url": "https://tech-geo.vercel.app",
+                "description": "Formation en électronique et informatique au Togo",
+                "inLanguage": "fr-FR",
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "https://tech-geo.vercel.app/boutique?q={search_term_string}",
+                  "query-input": "required name=search_term_string"
+                }
+              },
+              {
+                "@type": "Organization",
+                "@id": "https://tech-geo.vercel.app/#organization",
+                "name": "Tech-Geo",
+                "url": "https://tech-geo.vercel.app",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://tech-geo.vercel.app/images/Logo/logo.webp",
+                  "width": 512,
+                  "height": 512
+                },
+                "contactPoint": {
+                  "@type": "ContactPoint",
+                  "contactType": "customer service",
+                  "availableLanguage": "French",
+                  "areaServed": "TG"
+                },
+                "sameAs": ["https://tech-geo.vercel.app"]
+              },
+              {
+                "@type": "OnlineStore",
+                "@id": "https://tech-geo.vercel.app/#store",
+                "name": "Tech-Geo Boutique",
+                "url": "https://tech-geo.vercel.app/boutique",
+                "description": "Matériel électronique, composants et accessoires informatiques",
+                "currenciesAccepted": "XOF",
+                "priceRange": "₣₣",
+                "areaServed": {
+                  "@type": "Country",
+                  "name": "Togo"
+                }
+              }
+            ]
           })
         }} />
       </head>

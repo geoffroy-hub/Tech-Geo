@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { getSupabase } from '@/lib/supabase';
+import { checkRateLimit } from '@/lib/rateLimit';
 import NewsletterForm from '@/components/NewsletterForm';
 
 export default function ContactPage() {
@@ -10,6 +11,11 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const rl = checkRateLimit('contact-form', 3);
+    if (!rl.ok) {
+      setStatus('error');
+      return;
+    }
     setStatus('loading');
     try {
       const supabase = getSupabase();
@@ -29,7 +35,7 @@ export default function ContactPage() {
   const contactInfo = [
     { title: 'Adresse', value: 'Lomé, Togo', icon: '📍' },
     { title: 'Email', value: 'contact@tech-geo.vercel.app', icon: '✉️' },
-    { title: 'Téléphone', value: '+228 XX XX XX XX', icon: '📞' },
+    { title: 'Téléphone', value: '+228 71 03 01 88', icon: '📞' },
     { title: 'Horaires', value: 'Lun - Ven: 8h - 18h\nSam: 9h - 13h', icon: '🕒' },
   ];
 
@@ -64,7 +70,7 @@ export default function ContactPage() {
                   {status === 'loading' ? 'Envoi...' : 'Envoyer le message'}
                 </button>
                 {status === 'success' && <div className="form-success show">Message envoyé avec succès !</div>}
-                {status === 'error' && <div className="auth-error show">Erreur lors de l&apos;envoi du message.</div>}
+                {status === 'error' && <div className="auth-error show">Trop de tentatives. Veuillez patienter quelques minutes avant de réessayer.</div>}
               </form>
             </div>
 

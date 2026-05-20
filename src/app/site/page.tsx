@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { getSupabase } from '@/lib/supabase';
 import NewsletterForm from '@/components/NewsletterForm';
+import { checkRateLimit } from '@/lib/rateLimit';
+import PhoneInput from '@/components/PhoneInput';
 
 const plans = [
   {
@@ -361,47 +363,12 @@ export default function SitePage() {
                   />
                 </div>
                 <div className="form-group">
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    Téléphone
-                    <span style={{ fontSize: '0.75rem', color: 'var(--clr-muted)', fontWeight: 400 }}>(Togo)</span>
-                  </label>
-                  <div style={{ position: 'relative' }}>
-                    <span style={{
-                      position: 'absolute',
-                      left: '0.75rem',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      fontSize: '1.1rem',
-                      lineHeight: 1,
-                      pointerEvents: 'none',
-                      zIndex: 1,
-                    }}>🇹🇬</span>
-                    <input
-                      type="tel"
-                      value={form.phone}
-                      onChange={(e) => {
-                        const raw = e.target.value;
-                        if (raw === '' || raw === '+228 ' || raw === '+228') {
-                          setForm({ ...form, phone: '' });
-                          return;
-                        }
-                        const digits = raw.replace(/\D/g, '');
-                        let normalized = digits;
-                        if (digits.startsWith('228')) normalized = digits.slice(3);
-                        else if (digits.startsWith('00228')) normalized = digits.slice(5);
-                        normalized = normalized.slice(0, 8);
-                        const parts: string[] = [];
-                        for (let i = 0; i < normalized.length; i += 2) parts.push(normalized.slice(i, i + 2));
-                        const formatted = normalized.length > 0 ? `+228 ${parts.join(' ')}` : '';
-                        setForm({ ...form, phone: formatted });
-                      }}
-                      onFocus={e => { if (!e.target.value) setForm({ ...form, phone: '+228 ' }); }}
-                      onBlur={e => { if (e.target.value === '+228 ' || e.target.value === '+228') setForm({ ...form, phone: '' }); }}
-                      placeholder="+228 XX XX XX XX"
-                      maxLength={17}
-                      style={{ paddingLeft: '2.5rem' }}
-                    />
-                  </div>
+                  <label>Téléphone</label>
+                  <PhoneInput
+                    value={form.phone}
+                    onChange={(val) => setForm({ ...form, phone: val })}
+                    required
+                  />
                 </div>
               </div>
               <div className="form-group">

@@ -247,7 +247,7 @@ export default function ProductsPanel({ products, onRefresh }: { products: Produ
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                       {p.image_url && (
                         <img src={p.image_url} alt={p.name}
-                          style={{ width: 34, height: 34, borderRadius: 6, objectFit: 'cover', background: 'rgba(0,0,0,0.2)', flexShrink: 0 }} />
+                          style={{ width: 34, height: 34, borderRadius: 6, objectFit: 'cover', background: 'rgba(0,0,0,0.2)', flexShrink: 0 }}  loading="lazy" decoding="async"/>
                       )}
                       <span style={{ fontWeight: 600, fontSize: '0.88rem' }}>{p.name}</span>
                     </div>

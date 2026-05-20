@@ -67,7 +67,7 @@ export default function SoftwarePage() {
                     src={soft.img} 
                     alt={soft.name} 
                     style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
-                  />
+                   loading="lazy" decoding="async"/>
                 </div>
                 <div style={{ padding: '2rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
                   <h3 style={{ marginBottom: '1rem', color: 'var(--clr-accent)' }}>{soft.name}</h3>

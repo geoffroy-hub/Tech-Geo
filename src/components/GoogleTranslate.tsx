@@ -17,20 +17,29 @@ export default function GoogleTranslate() {
     }
   }, []);
 
-  // Charger le script Google Translate silencieusement
+  // Charger Google Translate de façon différée — après que la page soit idle
   useEffect(() => {
-    if (document.getElementById('google-translate-script')) return;
-    (window as any).googleTranslateElementInit = function () {
-      new (window as any).google.translate.TranslateElement(
-        { pageLanguage: 'fr', includedLanguages: 'en,fr', autoDisplay: false },
-        'google_translate_element_hidden'
-      );
+    const loadTranslate = () => {
+      if (document.getElementById('google-translate-script')) return;
+      (window as any).googleTranslateElementInit = function () {
+        new (window as any).google.translate.TranslateElement(
+          { pageLanguage: 'fr', includedLanguages: 'en,fr', autoDisplay: false },
+          'google_translate_element_hidden'
+        );
+      };
+      const script = document.createElement('script');
+      script.id = 'google-translate-script';
+      script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      script.async = true;
+      document.head.appendChild(script);
     };
-    const script = document.createElement('script');
-    script.id = 'google-translate-script';
-    script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-    script.async = true;
-    document.head.appendChild(script);
+
+    // Charger après que le navigateur soit inactif (pas pendant le chargement de la page)
+    if ('requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(loadTranslate, { timeout: 3000 });
+    } else {
+      setTimeout(loadTranslate, 2000);
+    }
   }, []);
 
   const switchTo = (target: 'fr' | 'en') => {

@@ -6,6 +6,7 @@ import { getSupabase } from '@/lib/supabase';
 import { useCart } from '@/hooks/useCart';
 import { useWishlist } from '@/hooks/useWishlist';
 import Link from 'next/link';
+import ShareButtons from '@/components/ShareButtons';
 
 const HARDCODED_PRODUCTS: Record<string, { id: string; name: string; price: number; category: string; image: string; description: string; rating: number; stock: number }> = {
   'prod-vo1': { id: 'prod-vo1', name: 'Tech-Geo VO1', price: 35000, category: 'microcontrôleurs', image: '/images/products/VO1.webp', description: 'Contrôleur intelligent VO1 haute performance pour projets IoT et domotique avancés.', rating: 5.0, stock: 10 },
@@ -58,14 +59,40 @@ export default function ProductDetailPage() {
     );
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": dbProduct.name,
+    "description": dbProduct.description,
+    "image": dbProduct.image || dbProduct.image_url || '/images/products/placeholder.webp',
+    "sku": dbProduct.id,
+    "category": dbProduct.category,
+    "offers": {
+      "@type": "Offer",
+      "url": `https://tech-geo.vercel.app/produit/${dbProduct.slug}`,
+      "priceCurrency": "XOF",
+      "price": String(dbProduct.price),
+      "availability": dbProduct.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+      "seller": { "@type": "Organization", "name": "Tech-Geo" }
+    },
+    "aggregateRating": dbProduct.rating ? {
+      "@type": "AggregateRating",
+      "ratingValue": String(dbProduct.rating),
+      "bestRating": "5",
+      "worstRating": "1",
+      "ratingCount": "1"
+    } : undefined
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <section className="section" style={{ paddingTop: '6rem' }}>
         <div className="container">
           <Link href="/boutique" style={{ color: 'var(--clr-muted)', fontSize: '0.85rem', display: 'inline-block', marginBottom: '2rem' }}>← Retour à la boutique</Link>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'start' }}>
             <div style={{ borderRadius: '12px', overflow: 'hidden', background: 'rgba(0,0,0,0.2)' }}>
-              <img src={dbProduct.image || dbProduct.image_url || '/images/products/placeholder.webp'} alt={dbProduct.name} style={{ width: '100%', height: 'auto', display: 'block' }} />
+              <img src={dbProduct.image || dbProduct.image_url || '/images/products/placeholder.webp'} alt={dbProduct.name} style={{ width: '100%', height: 'auto', display: 'block' }}  loading="lazy" decoding="async"/>
             </div>
             <div>
               <span style={{ color: 'var(--clr-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{dbProduct.category}</span>
@@ -93,6 +120,9 @@ export default function ProductDetailPage() {
                 <button className="btn btn-outline" onClick={() => addWishlist(dbProduct.id)} title="Ajouter aux favoris" style={{ padding: '0.75rem 1.5rem' }}>
                   ♡
                 </button>
+              </div>
+              <div style={{ marginTop: '1.25rem', paddingTop: '1.25rem', borderTop: '1px solid var(--clr-border)' }}>
+                <ShareButtons title={dbProduct.name} description={dbProduct.description} url={`https://tech-geo.vercel.app/produit/${dbProduct.slug}`} />
               </div>
             </div>
           </div>
